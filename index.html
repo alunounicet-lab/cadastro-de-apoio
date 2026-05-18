@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Cadastro de Pessoas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1 class="title">Sistema de Cadastro</h1>
+                    <p class="subtitle">Listagem de Apoio</p>
+                </div>
+                <div class="header-info">
+                    <span class="record-count" id="recordCount">12 registros</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Toolbar -->
+            <div class="toolbar">
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        class="search-input" 
+                        placeholder="Buscar por nome ou ordem..."
+                    >
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-primary" id="newRecordBtn">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Novo Registro
+                    </button>
+
+                    <button class="btn btn-secondary" id="exportExcelBtn">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                            <polyline points="13 2 13 9 20 9"></polyline>
+                        </svg>
+                        Excel
+                    </button>
+
+                    <button class="btn btn-secondary" id="exportPdfBtn">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                        </svg>
+                        PDF
+                    </button>
+
+                    <button class="btn btn-secondary" id="printBtn">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                            <rect x="6" y="14" width="12" height="8"></rect>
+                        </svg>
+                        Imprimir
+                    </button>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-wrapper">
+                <table class="table" id="dataTable">
+                    <thead>
+                        <tr class="table-header">
+                            <th>Ordem</th>
+                            <th>Nome</th>
+                            <th>Dia(s)</th>
+                            <th>Turno(s)</th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Dados serão preenchidos por JavaScript -->
+                    </tbody>
+                </table>
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <p>Nenhum registro encontrado</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal para Novo/Editar Registro -->
+    <div class="modal" id="recordModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Novo Registro</h2>
+                <button class="modal-close" id="closeModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="recordForm">
+                    <div class="form-group">
+                        <label for="ordem">Ordem *</label>
+                        <input type="number" id="ordem" class="form-input" placeholder="Ex: 1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nome">Nome *</label>
+                        <input type="text" id="nome" class="form-input" placeholder="Ex: João Silva" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dias">Dia(s)</label>
+                        <input type="text" id="dias" class="form-input" placeholder="Ex: Segunda-feira, Quarta-feira">
+                    </div>
+                    <div class="form-group">
+                        <label for="turnos">Turno(s)</label>
+                        <input type="text" id="turnos" class="form-input" placeholder="Ex: Manhã, Tarde">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelBtn">Cancelar</button>
+                <button class="btn btn-primary" id="submitBtn">Adicionar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
